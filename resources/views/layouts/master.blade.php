@@ -62,10 +62,6 @@
                                 </div>
                             </div>
                             <div class="system-access">
-                                <div class="light-dark-icon">
-                                    <!-- <i class="uil uil-bright"></i> -->
-                                    <i class="uil uil-moon"></i>
-                                </div>
                                 <div class="notification">
                                     <i class="uil uil-bell"></i>
                                     <div class="notification-box">

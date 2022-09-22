@@ -69,11 +69,15 @@ class LeadController extends Controller
             'lead_source' => $request->source,
             'staff_id' => $request->assign,
             'priority' => $request->priority,
-            'status' => 'potential',
+            'status' => strtolower($request->status),
             'image' => $imgName
         ]);
 
-        return redirect('/leads')->with('success','New Lead is created.');
+        if($request->status == 'Potential'){
+            return redirect('/leads')->with('success','New Lead is created.');
+        }else{
+            return redirect('/clients')->with('success','New Client is created.');
+        }
     }
 
     /**
@@ -93,9 +97,10 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lead $lead)
     {
-        //
+        $staffs = Staff::all();
+        return view('editLead',compact('lead','staffs'));
     }
 
     /**
@@ -105,9 +110,51 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lead $lead)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'job_title' => 'required',
+            'company' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'profile_img' => 'image',
+        ]);
+
+        $lead->name = $request->name;
+        $lead->email = $request->email;
+        $lead->phone_number = $request->phone_number;
+        $lead->job_title = $request->job_title;
+        $lead->company = $request->company;
+        $lead->city = $request->city;
+        $lead->address = $request->address;
+
+        if($request->source){
+            $lead->lead_source = $request->source;
+        }
+
+        if($request->assign){
+            $lead->staff_id = $request->assign;
+        }
+
+        if($request->priority){
+            $lead->priority = $request->priority;
+        }
+
+        if($request->profile_img){
+            $imgName = date('dmyhms').'.'.$request->profile_img->getClientOriginalExtension();
+            $request->profile_img->move(public_path('images'),$imgName);
+            $lead->image = $imgName;
+        }
+        $lead->save();
+
+        if($request->status == 'Potential'){
+            return redirect('/leads')->with('success','The information has been updated.');
+        }else{
+            return redirect('/clients')->with('success','The information has been updated.');
+        }
     }
 
     /**
@@ -123,7 +170,7 @@ class LeadController extends Controller
     }
 
     public function convert(Lead $lead){
-        $lead->status = 'client';
+        $lead->status = 'Client';
         $lead->save();
         return redirect('leads')->with('success','Lead '.$lead->name.' is converted to client.');
     }
@@ -137,10 +184,6 @@ class LeadController extends Controller
             $leads = Lead::where('status','potential')
                             ->where("name", "LIKE", "%$request->search_data%")
                             ->orWhere('email', 'LIKE',"%$request->search_data%")
-                            ->orWhere('phone_number', 'LIKE',"%$request->search_data%")
-                            ->orWhere('job_title', 'LIKE',"%$request->search_data%")
-                            ->orWhere('company', 'LIKE',"%$request->search_data%")
-                            ->orWhere('city', 'LIKE',"%$request->search_data%")
                             ->paginate();
             return view('lead',compact('leadAll','leads','staffs'));
         }

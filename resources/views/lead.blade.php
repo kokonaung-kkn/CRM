@@ -92,22 +92,21 @@
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text"><i class="fa-light fa-circle-exclamation"></i></span>
-                                            <input type="text" disabled name="status" value="Potential" class="form-control @error('status') is-invalid @enderror">
+                                            <input type="text" disabled value="Potential" class="form-control">
                                         </div>
-                                        @error('status')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        
+                                        <input type="hidden" name="status" value="Potential">
         
                                         <div class="input-group mb-3">
                                             <label class="input-group-text" for="inputGroupSelect01"><i class="fa-light fa-hashtag"></i></label>
                                             <select class="form-select" name="source" value="{{ old('source') }}" id="inputGroupSelect01">
                                                 <option selected>Source</option>
-                                                <option value="by company">By Company</option>
-                                                <option value="facebook">Facebook</option>
-                                                <option value="google">Google</option>
-                                                <option value="twitter">Twitter</option>
-                                                <option value="linkedin">Linkedin</option>
-                                                <option value="others">Others</option>
+                                                <option>By Company</option>
+                                                <option>Facebook</option>
+                                                <option>Google</option>
+                                                <option>Twitter</option>
+                                                <option>Linkedin</option>
+                                                <option>Others</option>
                                             </select>
                                         </div>
                                         @error('source')
@@ -177,7 +176,7 @@
                             </form>
                         </div>
                         <div class="down">
-                            <button><i class="fa-light fa-user-pen"></i></button>
+                            <a href="{{ route('leads.edit',$lead->id) }}"><button><i class="fa-light fa-user-pen"></i></button></a>
                             <form action="{{ route('leads.convert',$lead->id) }}" method="POST">
                             @csrf
                             @method('PUT')

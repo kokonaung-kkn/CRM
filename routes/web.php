@@ -24,10 +24,13 @@ Route::get('schedule', function(){
 });
 
 Route::resource('leads',LeadController::class);
-Route::get('search',[LeadController::class,'search'])->name('leads.search');
-Route::put('leads/{lead}', [LeadController::class, 'convert'])->name('leads.convert');
+Route::get('leadsearch',[LeadController::class,'search'])->name('leads.search');
+Route::put('leads/{lead}/convert', [LeadController::class, 'convert'])->name('leads.convert');
 
-Route::resource('clients', ClientController::class);
+Route::get('/clients',[ClientController::class,'index'])->name('clients.index');
+Route::delete('/clients{lead}',[ClientController::class,'destroy'])->name('clients.destroy');
+Route::get('clientsearch',[ClientController::class,'search'])->name('clients.search');
+Route::get('clients/{lead}/edit',[ClientController::class,'edit'])->name('clients.edit');
 
 Route::resource('staff', StaffController::class)->except([
     'create', 'show'

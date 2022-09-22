@@ -6,14 +6,14 @@
         <div>
             <h4>Clients Info <span class="badge">{{ count($clientAll) }}</span></h4>
         </div>
-        {{-- <div class="w-50">
-            <form action="{{ route('leads.search') }}" method="Get">
+        <div class="w-50">
+            <form action="{{ route('clients.search') }}" method="Get">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search..." name="search_data" aria-describedby="button-addon2">
                     <button class="btn" type="submit" id="button-addon2"><i class="fa-light fa-magnifying-glass"></i></button>
                 </div>
             </form>
-        </div> --}}
+        </div>
         <div>
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 New Client
@@ -92,11 +92,10 @@
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text"><i class="fa-light fa-circle-exclamation"></i></span>
-                                            <input type="text" disabled name="status" value="Potential" class="form-control @error('status') is-invalid @enderror">
+                                            <input type="text" disabled name="status" value="Client" class="form-control">
                                         </div>
-                                        @error('status')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        
+                                        <input type="hidden" name="status" value="Client">
         
                                         <div class="input-group mb-3">
                                             <label class="input-group-text" for="inputGroupSelect01"><i class="fa-light fa-hashtag"></i></label>
@@ -172,7 +171,7 @@
                             <button> View Details </button>
                         </div>
                         <div class="down">
-                            <button><i class="fa-light fa-user-pen"></i></button> 
+                            <a href="{{ route('clients.edit',$client->id) }}"><button><i class="fa-light fa-user-pen"></i></button></a> 
                             <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

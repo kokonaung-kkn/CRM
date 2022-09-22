@@ -22,27 +22,6 @@ class ClientController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -59,9 +38,10 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lead $lead)
     {
-        //
+        $staffs = Staff::all();
+        return view('editLead',compact('lead','staffs'));
     }
 
     /**
@@ -85,6 +65,20 @@ class ClientController extends Controller
     public function destroy(Lead $lead)
     {
         $lead->delete();
-        return redirect('client')->with('success','The information is deleted.');
+        return redirect('/clients')->with('success','The information is deleted.');
+    }
+
+    public function search(Request $request){
+        if($request->search_data === null){
+            return redirect()->route('clients.index');
+        }else{
+            $clientAll = Lead::where('status','client')->get();
+            $staffs = Staff::all();
+            $clients = Lead::where('status','client')
+                            ->where("name", "LIKE", "%$request->search_data%")
+                            ->orWhere('email', 'LIKE',"%$request->search_data%")
+                            ->paginate();
+            return view('client',compact('clientAll','clients','staffs'));
+        }
     }
 }
