@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LeadController;
-use App\Http\Controllers\StaffController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,8 @@ Route::delete('/clients{lead}',[ClientController::class,'destroy'])->name('clien
 Route::get('clientsearch',[ClientController::class,'search'])->name('clients.search');
 Route::get('clients/{lead}/edit',[ClientController::class,'edit'])->name('clients.edit');
 
-Route::resource('staff', StaffController::class)->except([
+Route::resource('staff', UserController::class)->except([
     'create', 'show'
 ]);
+
+Route::get('/admin', [AdminController::class,'index'])->name('admin.index');

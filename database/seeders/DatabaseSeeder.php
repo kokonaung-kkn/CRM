@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Lead;
-use App\Models\Staff;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Staff::factory(5)->create();
+        User::factory(5)->create();
         Lead::factory(15)->create();
     }
 }

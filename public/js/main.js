@@ -35,12 +35,13 @@ $('.nav-icon').on('click ', function() {
 
 let toggle = true;
 $('.sub-menu').on('click', function() {
-    $('.sub-menu ul').slideToggle();
-    if (toggle) {
-        $('.uil-angle-down').css('transform', 'rotate(90deg)');
+    $(this.children[1]).slideToggle();
+    let transform = $(this.children[0].children[1].children).css('transform')
+    if (transform == 'matrix(1, 0, 0, 1, 0, 0)') {
+        $(this.children[0].children[1].children).css('transform', 'rotate(90deg)');
         toggle = false;
     } else {
-        $('.uil-angle-down').css('transform', 'rotate(0deg)');
+        $(this.children[0].children[1].children).css('transform', 'rotate(0deg)');
         toggle = true;
     }
 })

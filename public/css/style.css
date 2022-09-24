@@ -152,6 +152,7 @@ div.sidebar {
     margin-top: -3px;
     right: 10px;
     transition: all 0.3s ease;
+    transform: rotate(0);
 }
 
 .sub-menu ul {

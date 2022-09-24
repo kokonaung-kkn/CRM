@@ -25,10 +25,10 @@ class LeadFactory extends Factory
             'city' => $this->faker->city(),
             'address' => $this->faker->address(),
             'lead_source' => 'Google',
-            'status' => 'new',
-            'priority' => random_int(1,5),
-            'image' => $this->faker->image(),
-            'staff_id' => random_int(1,7),
+            'status' => 'potential',
+            'priority' => random_int(1,3),
+            'image' => 'lead1.jpg',
+            'staff_id' => random_int(1,5),
         ];
     }
 }

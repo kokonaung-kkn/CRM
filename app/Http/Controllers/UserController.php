@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreStaffRequest;
-use App\Models\Staff;
+use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class UserController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $all_staff = Staff::all();
+        $all_staff = User::where('is_admin',0)->get();
         return view('staff',compact('all_staff'));
     }
 
@@ -35,13 +35,16 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStaffRequest $request)
+    public function store(StoreUserRequest $request)
     {
-        $staff = new Staff();
+        $staff = new User();
         $staff->name = $request->name;
         $staff->job_title = $request->job_title;
+        $staff->role = $request->role;
         $staff->email = $request->email;
+        $staff->is_admin = $request->is_admin;
         $staff->phone_number = $request->phone_number;
+        $staff->password = bcrypt('password');
         
         $imgName = date('dmyhms').'.'.request()->profile_img->getClientOriginalExtension();
         request()->profile_img->move(public_path('images'),$imgName);
@@ -68,7 +71,7 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staff $staff)
+    public function edit(User $staff)
     {
         return view('editStaff',compact('staff'));
     }
@@ -80,19 +83,23 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, User $staff)
     {
         request()->validate([
             'name' => 'required|max:255',
             'job_title' => 'required|max:255',
+            'role' => 'required',
             'email' => 'required',
+            'is_admin' => 'required',
             'phone_number' => 'required',
             'profile_img' => 'image',
         ]);
 
         $staff->name = $request->name;
         $staff->job_title = $request->job_title;
+        $staff->role = $request->role;
         $staff->email = $request->email;
+        $staff->is_admin = $request->is_admin;
         $staff->phone_number = $request->phone_number;
         
         if($request->profile_img){
@@ -111,7 +118,7 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy(User $staff)
     {
         $staff->delete();
         return redirect('staff')->with('success','The Information is deleted successfully.');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lead;
-use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isEmpty;
@@ -19,7 +19,7 @@ class LeadController extends Controller
     {
         $leadAll = Lead::where('status','potential')->get();
         $leads = Lead::where('status','potential')->paginate(8);
-        $staffs = Staff::all();
+        $staffs = User::all();
         return view('lead',compact('leadAll','leads','staffs'));
     }
 
@@ -99,7 +99,7 @@ class LeadController extends Controller
      */
     public function edit(Lead $lead)
     {
-        $staffs = Staff::all();
+        $staffs = User::all();
         return view('editLead',compact('lead','staffs'));
     }
 
@@ -180,7 +180,7 @@ class LeadController extends Controller
             return redirect()->route('leads.index');
         }else{
             $leadAll = Lead::where('status','potential')->get();
-            $staffs = Staff::all();
+            $staffs = User::all();
             $leads = Lead::where('status','potential')
                             ->where("name", "LIKE", "%$request->search_data%")
                             ->orWhere('email', 'LIKE',"%$request->search_data%")

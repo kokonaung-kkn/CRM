@@ -4,11 +4,11 @@
 <div class="contents">
     <div class="content-title">
         <div>
-            <h4>Staff Info</h4>
+            <h4>Admin Info</h4>
         </div>
         <div>
             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                New Staff
+                New Admin
             </button>
 
             <!-- Modal -->

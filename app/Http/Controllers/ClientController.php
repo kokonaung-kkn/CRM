@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lead;
-use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -17,7 +17,7 @@ class ClientController extends Controller
     {
         $clientAll = Lead::where('status','client')->get();
         $clients = Lead::where('status','client')->paginate(8);
-        $staffs = Staff::all();
+        $staffs = User::all();
         return view('client',compact('clientAll','clients','staffs'));
     }
 
@@ -40,7 +40,7 @@ class ClientController extends Controller
      */
     public function edit(Lead $lead)
     {
-        $staffs = Staff::all();
+        $staffs = User::all();
         return view('editLead',compact('lead','staffs'));
     }
 
@@ -73,7 +73,7 @@ class ClientController extends Controller
             return redirect()->route('clients.index');
         }else{
             $clientAll = Lead::where('status','client')->get();
-            $staffs = Staff::all();
+            $staffs = User::all();
             $clients = Lead::where('status','client')
                             ->where("name", "LIKE", "%$request->search_data%")
                             ->orWhere('email', 'LIKE',"%$request->search_data%")
