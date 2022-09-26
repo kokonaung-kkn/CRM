@@ -116,11 +116,16 @@
                                             <img src="/images/unnamed.png" alt="" srcset="">
                                         </div>
                                         <div class="user-detail dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                            Millie Bobby Brown
+                                            {{ Auth::user()->name }}
                                         </div>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a class="dropdown-item" href="#"><i class="uil uil-user-check"></i> Update Profile</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="uil uil-signout"></i> Logout</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"><i class="uil uil-signout"></i> Logout</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

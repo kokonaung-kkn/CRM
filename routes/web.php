@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClientController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', function(){
     return view('dashboard');
-});
+})->middleware('auth');
 
 Route::get('schedule', function(){
     return view('schedule');
@@ -42,3 +43,7 @@ Route::get('/admin/{staff}/edit', [AdminController::class,'edit'])->name('admin.
 Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 Route::delete('/admin{staff}',[AdminController::class,'destroy'])->name('admin.destroy');
 
+
+Auth::routes([
+    'register' => false,
+]);
