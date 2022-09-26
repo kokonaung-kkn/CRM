@@ -31,14 +31,6 @@
                                 @enderror
 
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-light fa-briefcase"></i></span>
-                                    <input type="text" name="job_title" id="" value="{{ old('job_title') }}" placeholder="Job Title" class="form-control @error('job_title') is-invalid @enderror">
-                                </div>
-                                @error('job_title')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-
-                                <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fa-light fa-id-badge"></i></span>
                                     <input type="text" name="role" id="" value="{{ old('role') }}" placeholder="Role" class="form-control @error('role') is-invalid @enderror">
                                 </div>
@@ -70,20 +62,6 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
-                                <div class="mb-3 d-flex align-items-center">
-                                    <span class="input-group-text" style="background-color: #353a56; color:#eaeef4">Admin</span>
-                                    <div class="text-center w-75">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="is_admin" id="inlineRadio1" value="1">
-                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" checked type="radio" name="is_admin" id="inlineRadio2" value="0">
-                                            <label class="form-check-label" for="inlineRadio2">No</label>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="d-flex justify-content-center">
                                     <input type="submit" class="btn btn-success w-25" value="Create">
                                 </div>
@@ -100,8 +78,8 @@
                 <table id="myTable" class="display">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Name</th>
-                            <th>Job Title</th>
                             <th>Role</th>
                             <th>Email</th>
                             <th>Phone Number</th>                           
@@ -109,10 +87,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $count = 1 ?>
                         @foreach($all_staff as $staff)
                             <tr>
+                                <td>{{ $count++ }}</td>
                                 <td>{{ $staff->name }}</td>
-                                <td>{{ $staff->job_title }}</td>
                                 <td><span class="badge bg-success rounded-pill">{{ $staff->role }}</span></td>
                                 <td>{{ $staff->email }}</td>
                                 <td>{{ $staff->phone_number }}</td>

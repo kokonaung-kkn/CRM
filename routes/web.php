@@ -38,3 +38,7 @@ Route::resource('staff', UserController::class)->except([
 ]);
 
 Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
+Route::get('/admin/{staff}/edit', [AdminController::class,'edit'])->name('admin.edit');
+Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+Route::delete('/admin{staff}',[AdminController::class,'destroy'])->name('admin.destroy');
+

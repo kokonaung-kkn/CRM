@@ -39,10 +39,9 @@ class UserController extends Controller
     {
         $staff = new User();
         $staff->name = $request->name;
-        $staff->job_title = $request->job_title;
         $staff->role = $request->role;
         $staff->email = $request->email;
-        $staff->is_admin = $request->is_admin;
+        $staff->is_admin = 0;
         $staff->phone_number = $request->phone_number;
         $staff->password = bcrypt('password');
         
@@ -87,19 +86,15 @@ class UserController extends Controller
     {
         request()->validate([
             'name' => 'required|max:255',
-            'job_title' => 'required|max:255',
             'role' => 'required',
             'email' => 'required',
-            'is_admin' => 'required',
             'phone_number' => 'required',
             'profile_img' => 'image',
         ]);
 
         $staff->name = $request->name;
-        $staff->job_title = $request->job_title;
         $staff->role = $request->role;
         $staff->email = $request->email;
-        $staff->is_admin = $request->is_admin;
         $staff->phone_number = $request->phone_number;
         
         if($request->profile_img){
