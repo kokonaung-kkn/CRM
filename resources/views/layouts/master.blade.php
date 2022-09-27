@@ -32,12 +32,14 @@
                         <li><a href="/" class="{{ Request::segment(1) == '' ? 'active' : '' }}"><i class="uil uil-dashboard"></i><span>Dashboard</span></a></li>
                         <li><a href="{{ route('leads.index') }}" class="{{ Request::segment(1) == 'leads' ? 'active' : '' }}"><i class="uil uil-phone"></i><span>Leads</span></a></li>
                         <li><a href="{{ route('clients.index') }}" class="{{ Request::segment(1) == 'clients' ? 'active' : '' }}"><i class="uil uil-users-alt"></i><span>Clients</span></a></li>
-                        <li><a href="#" class="{{ Request::segment(1) == 'products' ? 'active' : '' }}"><i class="uil uil-tag-alt"></i><span>Products</span></a></li>
+                        <li><a href="#" class="{{ Request::segment(1) == 'products' ? 'active' : '' }}"><i class="uil uil-tag-alt"></i><span>Projects</span></a></li>
                         <li><a href="#" class="{{ Request::segment(1) == 'orders' ? 'active' : '' }}"><i class="uil uil-shopping-cart"></i><span>Orders</span></a></li>
                         <li class="sub-menu">
                             <a href="#"><i class="fa-light fa-users"></i><span>Team <i class="uil uil-angle-down"></i></span></a>
                             <ul>
-                                <li><a href="{{ route('admin.index') }}" class="{{ Request::segment(1) == 'admin' ? 'active' : '' }}"><span>Admin</span></a></li>
+                                @if(auth()->user()->is_admin == 1)
+                                    <li><a href="{{ route('admin.index') }}" class="{{ Request::segment(1) == 'admin' ? 'active' : '' }}"><span>Admin</span></a></li>
+                                @endif
                                 <li><a href="{{ route('staff.index') }}" class="{{ Request::segment(1) == 'staff' ? 'active' : '' }}"><span>Staff</span></a></li>
                             </ul>
                         </li>

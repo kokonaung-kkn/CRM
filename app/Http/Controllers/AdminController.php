@@ -8,6 +8,11 @@ use App\Http\Requests\StoreUserRequest;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $all_staff = User::where('is_admin',1)->get();
