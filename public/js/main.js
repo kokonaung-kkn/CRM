@@ -61,6 +61,8 @@ let table = new DataTable('#myTable', {
     // options
 });
 
+$('#my-select').multiSelect()
+
 $('.btn-danger').on('click', function(event) {
     var form = $(this).closest("form");
     event.preventDefault();

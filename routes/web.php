@@ -6,6 +6,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::get('/admin/{staff}/edit', [AdminController::class,'edit'])->name('admin.
 Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 Route::delete('/admin{staff}',[AdminController::class,'destroy'])->name('admin.destroy');
 
+Route::resource('tasks',TaskController::class);
 
 Auth::routes([
     'register' => false,

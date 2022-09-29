@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    @yield('schedule_link')
+    @yield('multi-select-link')
     <link rel="stylesheet" href="/css/style.css">
     {{-- <link rel="stylesheet" href="/css/all.min.css"> --}}
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
@@ -32,8 +32,7 @@
                         <li><a href="/" class="{{ Request::segment(1) == '' ? 'active' : '' }}"><i class="uil uil-dashboard"></i><span>Dashboard</span></a></li>
                         <li><a href="{{ route('leads.index') }}" class="{{ Request::segment(1) == 'leads' ? 'active' : '' }}"><i class="uil uil-phone"></i><span>Leads</span></a></li>
                         <li><a href="{{ route('clients.index') }}" class="{{ Request::segment(1) == 'clients' ? 'active' : '' }}"><i class="uil uil-users-alt"></i><span>Clients</span></a></li>
-                        <li><a href="#" class="{{ Request::segment(1) == 'products' ? 'active' : '' }}"><i class="uil uil-tag-alt"></i><span>Projects</span></a></li>
-                        <li><a href="#" class="{{ Request::segment(1) == 'orders' ? 'active' : '' }}"><i class="uil uil-shopping-cart"></i><span>Orders</span></a></li>
+                        <li><a href="{{ route('tasks.index') }}" class="{{ Request::segment(1) == 'tasks' ? 'active' : '' }}" class="{{ Request::segment(1) == 'projects' ? 'active' : '' }}"><i class="fa-light fa-diagram-project"></i><span>Projects</span></a></li>
                         <li class="sub-menu">
                             <a href="#"><i class="fa-light fa-users"></i><span>Team <i class="uil uil-angle-down"></i></span></a>
                             <ul>
@@ -150,7 +149,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/all.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    @yield('schedule_script')
+    @yield('multi-select-script')
     <script src="/js/main.js"></script>
     @yield('alert')
 </body>
