@@ -630,6 +630,31 @@ Leads
     color: var(--cont-color);
 }
 
+/* -------------------
+Dashboard
+------------------- */
+.d-card{
+    color: var(--main-bg-nav);
+}
+.card-icons{
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card-icons svg{
+    font-size: 30px;
+}
+.card-icons div{
+    font-size: 25px;
+    font-weight: bold;
+}
+.card-text{
+    text-align: center;
+    font-size: 20px;
+    color: #0d1231;
+}
+
 @media (max-width:600px) {
     .system-access .user-detail {
         display: none;

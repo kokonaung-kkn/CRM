@@ -6,6 +6,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 
 /*
@@ -18,9 +19,7 @@ use App\Http\Controllers\TaskController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
-    return view('dashboard');
-})->middleware('auth');
+Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
 Route::get('schedule', function(){
     return view('schedule');
