@@ -43,7 +43,11 @@ Route::get('/admin/{staff}/edit', [AdminController::class,'edit'])->name('admin.
 Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 Route::delete('/admin{staff}',[AdminController::class,'destroy'])->name('admin.destroy');
 
-Route::resource('tasks',TaskController::class);
+Route::resource('tasks',TaskController::class)->except([
+    'show'
+]);
+
+Route::get('tasks/{task}/dashboard',[TaskController::class,'show'])->name('tasks.show');
 
 Auth::routes([
     'register' => false,

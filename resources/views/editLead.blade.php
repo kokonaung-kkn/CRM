@@ -3,7 +3,7 @@
 @section('content')
     <div class="contents">
         <div class="card mt-5 mb-5" style="width: 50rem;margin: auto;">
-            <div class="card-header">
+            <div class="card-header text-white">
                 <h3>Edit {{ Request::segment(1) == 'leads' ? 'Lead' : 'Client'}} Infomation</h3>
             </div>
             <div class="card-body">

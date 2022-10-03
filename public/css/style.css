@@ -655,6 +655,81 @@ Dashboard
     color: #0d1231;
 }
 
+/* -------------
+Project Room
+--------------- */
+.card-header{
+    background-color: var(--main-bg-nav);
+}
+.client-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.client-img img{
+    width: 100%;
+}
+
+.client-name{
+    font-size: 30px;
+    color: var(--main-bg-nav);
+}
+
+.client-company{
+    font-size: 17px;
+    color: var(--main-bg-nav);
+}
+
+.client-job{
+    font-size: 14px;
+}
+
+.client-social-info a{
+    color: var(--main-bg-nav);
+}
+
+.project.progress{
+    background-color: #c9c9c9;
+}
+
+.staff-img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.staff-img img{
+    width: 100%;
+}
+
+.staff-name{
+    font-size: 20px;
+    color: var(--main-bg-nav);
+}
+
+.staff-social-info a{
+    color: var(--main-bg-nav);
+}
+
+.pj-room-nav-link{
+    color: var(--main-bg-nav);
+    margin-right: 20px;
+    font-size: 18px;
+    transition: all 0.5s ease;
+}
+
+.pj-room-nav-link.active{
+    text-decoration: underline;
+}
+
+.pj-room-nav-link:hover{
+    color: var(--main-bg-nav);
+    text-decoration: underline;
+}
+
 @media (max-width:600px) {
     .system-access .user-detail {
         display: none;

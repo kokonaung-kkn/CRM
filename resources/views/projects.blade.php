@@ -139,8 +139,9 @@
                                 <td>{{ $task->start_time }}</td>
                                 <td>{{ $task->end_time }}</td>
                                 <td class="d-flex">
-                                    <a href="{{ route('tasks.edit',$task->id) }}" class="btn btn-secondary me-2"><i class="uil uil-edit"></i></a>
-                                    <form action="{{ route('tasks.destroy',$task->id) }}" method="POST">
+                                    <a title="Project Room" href="{{ route('tasks.show',$task->project_no) }}" class="btn btn-warning me-2"><i class="uil uil-meeting-board"></i></a>
+                                    <a href="{{ route('tasks.edit',$task->project_no) }}" class="btn btn-secondary me-2"><i class="uil uil-edit"></i></a>
+                                    <form action="{{ route('tasks.destroy',$task->project_no) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>                                    

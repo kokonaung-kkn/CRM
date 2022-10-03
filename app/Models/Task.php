@@ -9,6 +9,8 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'project_no';
+    public $incrementing = false;
     protected $fillable = [
         'project_no',
         'title',
@@ -28,6 +30,6 @@ class Task extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'task_users','task_id');
     }
 }
