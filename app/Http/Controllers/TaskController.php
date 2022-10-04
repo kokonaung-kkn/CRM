@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Lead;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Expense;
+use App\Models\Payment;
 use App\Models\TaskUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -86,7 +88,14 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('projectroom',compact('task'));
+        $totalExpense = Expense::where('task_id',$task->project_no)->sum('amount');
+        $paidTotal = Payment::where('task_id',$task->project_no)
+            ->where('status','paid')
+            ->sum('amount');
+        $unpaid = Payment::where('task_id',$task->project_no)
+            ->where('status','unpaid')
+            ->count('id');
+        return view('projectroom',compact('task','totalExpense','paidTotal', 'unpaid'));
     }
 
     /**
@@ -158,5 +167,18 @@ class TaskController extends Controller
         $task->delete();
         TaskUser::where('task_id',$task->project_no)->delete();
         return redirect('/tasks')->with('success','The information is deleted.');
+    }
+
+    public function expense(Task $task)
+    {
+        return view('expense',compact('task'));
+    }
+
+    public function payment(Task $task)
+    {
+        $paidTotal = Payment::where('task_id',$task->project_no)
+            ->where('status','paid')
+            ->sum('amount');
+        return view('payment',compact('task','paidTotal'));
     }
 }

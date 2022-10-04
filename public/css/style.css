@@ -430,7 +430,7 @@ Contents
     background-color: #23273d;
 }
 
-.contents .content-title div .modal-content {
+.modal-content {
     background-color: var(--main-bg-cont);
 }
 
@@ -668,10 +668,6 @@ Project Room
     overflow: hidden;
 }
 
-.client-img img{
-    width: 100%;
-}
-
 .client-name{
     font-size: 30px;
     color: var(--main-bg-nav);
@@ -701,10 +697,18 @@ Project Room
     overflow: hidden;
 }
 
+.client-img.expense,
+.staff-img.expense{
+    width: 60px;
+    height: 60px;
+}
+
+.client-img img,
 .staff-img img{
     width: 100%;
 }
 
+.client-name.expense,
 .staff-name{
     font-size: 20px;
     color: var(--main-bg-nav);

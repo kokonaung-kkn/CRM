@@ -2,22 +2,22 @@
 
 @section('content')
 <div class="contents">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a style="color: #353a56; text-decoration: underline;" href="/tasks">Projects</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Project Room</li>
-        </ol>
-    </nav>
     <div class="content-title">
         <div>
             <h4>Project Room : {{ $task->title }}</h4>
         </div>
         <div class="d-flex pj-room-nav">
             <a href="{{ route('tasks.show',$task->project_no) }}" class="pj-room-nav-link active">Dashboard</a>
-            <a href="" class="pj-room-nav-link">Payment</a>
-            <a href="" class="pj-room-nav-link">Expense</a>
+            <a href="{{ route('tasks.payment',$task->project_no) }}" class="pj-room-nav-link">Payment</a>
+            <a href="{{ route('tasks.expense',$task->project_no) }}" class="pj-room-nav-link">Expense</a>
         </div>
     </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a style="color: #353a56; text-decoration: underline;" href="/tasks"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Project Room</li>
+        </ol>
+    </nav>
     <div class="content-detail mt-3">
         <div class="row mb-4">
             <div class="col-3">
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <div class="card-icons">
                             <i class="fa-solid fa-credit-card"></i>
-                            <div class="total">$0</div>
+                            <div class="total">${{ $paidTotal }}</div>
                         </div>
                         <div class="card-text">
                             Total Amount Paid
@@ -64,7 +64,7 @@
                     <div class="card-body">
                         <div class="card-icons">
                             <i class="fa-solid fa-file-invoice-dollar"></i>
-                            <div class="total">0</div>
+                            <div class="total">{{ $unpaid }}</div>
                         </div>
                         <div class="card-text">
                             Unpaid Invoices
@@ -105,7 +105,7 @@
                 <div class="card mb-3">
                     <div class="card-header d-flex justify-content-between align-items-center text-white">
                         <h5>Total Expense</h5>
-                        <h6>$3000</h6>
+                        <h6>${{ $totalExpense }}</h6>
                     </div>
                     <div class="card-body d-flex justify-content-center">
                         <table class="table table-striped">
@@ -116,10 +116,15 @@
                                 <th>Date</th>
                             </thead>
                             <tbody>
-                                <td>1</td>
-                                <td>Staff Salary</td>
-                                <td>$2000</td>
-                                <td>20-9-2022</td>
+                                <?php $count = 1 ?>
+                                @foreach($task->expenses as $expense)
+                                    <tr>
+                                        <td>{{ $count++ }}</td>
+                                        <td>{{ $expense->title }}</td>
+                                        <td>${{ $expense->amount }}</td>
+                                        <td>{{ $expense->Date }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

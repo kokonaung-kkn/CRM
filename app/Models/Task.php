@@ -32,4 +32,14 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class,'task_users','task_id');
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class,'task_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class,'task_id');
+    }
 }

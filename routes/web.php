@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TaskController;
 
 /*
@@ -48,6 +50,18 @@ Route::resource('tasks',TaskController::class)->except([
 ]);
 
 Route::get('tasks/{task}/dashboard',[TaskController::class,'show'])->name('tasks.show');
+Route::get('tasks/{task}/expense',[TaskController::class,'expense'])->name('tasks.expense');
+Route::get('tasks/{task}/payment',[TaskController::class,'payment'])->name('tasks.payment');
+
+Route::resource('expenses', ExpenseController::class)->except([
+    'index', 'show', 'create', 'edit',
+]);
+
+Route::resource('payments', PaymentController::class)->except([
+    'index', 'show', 'create', 'edit',
+]);
+
+Route::put('payments/{payment}',[PaymentController::class,'paid'])->name('payments.paid');
 
 Auth::routes([
     'register' => false,
