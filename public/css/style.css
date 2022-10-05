@@ -631,6 +631,80 @@ Leads
 }
 
 /* -------------------
+User Deatil
+-------------------- */
+.body section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+.body input {
+    display: none;
+}
+  
+.body label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+}
+  
+.body label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.body label:hover {
+    color: #888;
+    cursor: pointer;
+}
+  
+.body input:checked + label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid orange;
+    border-bottom: 1px solid #fff;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+
+.inner{
+    position: relative;
+}
+
+.inner::before{
+    position: absolute;
+    content: '';
+    height: 7px;
+    width: 7px;
+    background-color: #23273d;
+    border-radius: 50%;
+    left: -5%;
+    top: 40%;
+    z-index: 1;
+}
+
+.inner::after{
+    position: absolute;
+    content: '';
+    height: 40px;
+    width: 2px;
+    background-color: #08e47d;
+    border-radius: 50%;
+    left: -4.55%;
+    top: -30%;
+}
+
+/* -------------------
 Dashboard
 ------------------- */
 .d-card{

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lead;
+use App\Models\Task;
 use App\Models\User;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use function PHPUnit\Framework\isEmpty;
 
 class LeadController extends Controller
@@ -86,9 +88,32 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lead $lead)
     {
-        //
+        $projects = Task::where('lead_id',$lead->id)->get();
+        $payments_paid = DB::table('payments')
+                            ->selectRaw('payments.*,tasks.title AS project')
+                            ->leftJoin('tasks','tasks.project_no','payments.task_id')
+                            ->where('tasks.lead_id',$lead->id)
+                            ->get();
+        $payment_list = [];
+        foreach($payments_paid as $payment){
+            $payment_list[$payment->project] = [];
+        }
+
+        foreach($payments_paid as $payment){
+            array_push($payment_list[$payment->project],[
+                'title' => $payment->title,
+                'amount' => $payment->amount,
+                'date' => $payment->Date,
+                'status' => $payment->status,
+            ]);
+        }
+        return view('leadDetail',compact('lead','projects', 'payment_list'));
+
+        // SELECT payments.*, tasks.title AS project, SUM(payments.amount) AS total_paid FROM payments
+        // LEFT JOIN tasks ON tasks.project_no = payments.task_id WHERE tasks.lead_id = 1 AND payments.status = 'paid'
+        // GROUP BY 'project'
     }
 
     /**

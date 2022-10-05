@@ -35,6 +35,7 @@ Route::get('/clients',[ClientController::class,'index'])->name('clients.index');
 Route::delete('/clients{lead}',[ClientController::class,'destroy'])->name('clients.destroy');
 Route::get('clientsearch',[ClientController::class,'search'])->name('clients.search');
 Route::get('clients/{lead}/edit',[ClientController::class,'edit'])->name('clients.edit');
+Route::get('clients/{lead}',[ClientController::class,'show'])->name('clients.show');
 
 Route::resource('staff', UserController::class)->except([
     'create', 'show'

@@ -168,7 +168,7 @@
                 <div class="profile-card">
                     <div class="hover-box">
                         <div class="up">
-                            <button> View Details </button>
+                            <a href="{{ route('leads.show',$lead->id) }}"><button> View Details </button></a>
                             <form action="{{ route('leads.destroy',$lead->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

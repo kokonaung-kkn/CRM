@@ -89,27 +89,54 @@
     </div>
 </div>
 <script>
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-    ];
+    const income_vs_expense = {
+        'Jan' : {'income': 0, 'expense': 0},
+        'Feb' : {'income': 0, 'expense': 0},
+        'Mar' : {'income': 0, 'expense': 0},
+        'Apr' : {'income': 0, 'expense': 0},
+        'May' : {'income': 0, 'expense': 0},
+        'Jun' : {'income': 0, 'expense': 0},
+        'Jul' : {'income': 0, 'expense': 0},
+        'Aug' : {'income': 0, 'expense': 0},
+        'Sep' : {'income': 0, 'expense': 0},
+        'Oct' : {'income': 0, 'expense': 0},
+        'Nov' : {'income': 0, 'expense': 0},
+        'Dec' : {'income': 0, 'expense': 0}
+    }
+
+    @foreach($incomes as $income)
+        income_vs_expense['{{ $income->Months }}'].income = {{ $income->Total }}
+    @endforeach
+
+    @foreach($expenses as $expense)
+        income_vs_expense['{{ $expense->Months }}'].expense = {{ $expense->Total }}
+    @endforeach
+
+    let in_ex_months = Object.keys(income_vs_expense)
+    let in_ex_total = Object.values(income_vs_expense)
+    let income_total = []
+    let expense_total = []
+    console.log(in_ex_total[0].income)
+
+    for(let i=0; i<in_ex_total.length; i++){
+        income_total.push(in_ex_total[i].income)
+        expense_total.push(in_ex_total[i].expense)
+    }
+
+    console.log(income_total)
+    console.log(expense_total)
 
     const data = {
-        labels: labels,
+        labels: in_ex_months,
         datasets: [{
         label: 'Income',
-            backgroundColor: '#353a56',
-            data: [13, 10, 5, 2, 20, 30, 45],
+            backgroundColor: '#35ed26',
+            data: income_total,
         },
         {
             label: 'Expanse',
-            backgroundColor: '#0d1231',
-            data: [23, 8, 15, 12, 30, 20, 35],
+            backgroundColor: '#325def',
+            data: expense_total,
         }]
     };
 
@@ -134,6 +161,8 @@
         document.getElementById('incomeVSexpanse'),
         config
     );
+
+    //Monthly Projects Chart
 
     const month_proj = {
         'Jan' : 0,

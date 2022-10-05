@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lead;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -27,9 +29,29 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lead $lead)
     {
-        //
+        $projects = Task::where('lead_id',$lead->id)->get();
+        $payments_paid = DB::table('payments')
+                            ->selectRaw('payments.*,tasks.title AS project')
+                            ->leftJoin('tasks','tasks.project_no','payments.task_id')
+                            ->where('tasks.lead_id',$lead->id)
+                            ->get();
+        $payment_list = [];
+        foreach($payments_paid as $payment){
+            $payment_list[$payment->project] = [];
+        }
+
+        foreach($payments_paid as $payment){
+            array_push($payment_list[$payment->project],[
+                'title' => $payment->title,
+                'amount' => $payment->amount,
+                'date' => $payment->Date,
+                'status' => $payment->status,
+            ]);
+        }
+        return view('leadDetail',compact('lead','projects', 'payment_list'));
+
     }
 
     /**

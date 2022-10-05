@@ -168,7 +168,7 @@
                 <div class="profile-card">
                     <div class="hover-box">
                         <div class="up">
-                            <button> View Details </button>
+                            <a href="{{ route('clients.show',$client->id) }}"><button> View Details </button></a>
                         </div>
                         <div class="down">
                             <a href="{{ route('clients.edit',$client->id) }}"><button><i class="fa-light fa-user-pen"></i></button></a> 
