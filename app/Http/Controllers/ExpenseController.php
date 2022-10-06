@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Store a newly created resource in storage.
      *

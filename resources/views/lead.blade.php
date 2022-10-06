@@ -169,14 +169,18 @@
                     <div class="hover-box">
                         <div class="up">
                             <a href="{{ route('leads.show',$lead->id) }}"><button> View Details </button></a>
+                            @if(auth()->user()->is_admin == 1)
                             <form action="{{ route('leads.destroy',$lead->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button><i class="fa-light fa-trash-can"></i></button>
                             </form>
+                            @endif
                         </div>
                         <div class="down">
+                            @if(auth()->user()->is_admin == 1)
                             <a href="{{ route('leads.edit',$lead->id) }}"><button><i class="fa-light fa-user-pen"></i></button></a>
+                            @endif
                             <form action="{{ route('leads.convert',$lead->id) }}" method="POST">
                             @csrf
                             @method('PUT')

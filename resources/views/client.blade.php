@@ -170,6 +170,7 @@
                         <div class="up">
                             <a href="{{ route('clients.show',$client->id) }}"><button> View Details </button></a>
                         </div>
+                        @if(auth()->user()->is_admin == 1)
                         <div class="down">
                             <a href="{{ route('clients.edit',$client->id) }}"><button><i class="fa-light fa-user-pen"></i></button></a> 
                             <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
@@ -178,6 +179,7 @@
                                 <button><i class="fa-light fa-trash-can"></i></button>
                             </form>                                                    
                         </div>
+                        @endif
                     </div>
                     <div class="card-border-top"></div>
                     <div class="img">

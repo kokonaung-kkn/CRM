@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index(){
         $allLeads = Lead::where('status','potential')->get();
         $allClients = Lead::where('status','client')->get();

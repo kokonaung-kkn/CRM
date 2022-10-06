@@ -6,11 +6,13 @@
         <div>
             <h4>Project Room : {{ $task->title }}</h4>
         </div>
+        @if(auth()->user()->is_admin == 1)
         <div class="d-flex pj-room-nav">
             <a href="{{ route('tasks.show',$task->project_no) }}" class="pj-room-nav-link">Dashboard</a>
             <a href="{{ route('tasks.payment',$task->project_no) }}" class="pj-room-nav-link">Payment</a>
             <a href="{{ route('tasks.expense',$task->project_no) }}" class="pj-room-nav-link active">Expense</a>
         </div>
+        @endif
     </div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

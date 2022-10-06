@@ -30,7 +30,9 @@
                 </div>
                 <div class="menu-item">
                     <ul class="main">
+                        @if(auth()->user()->is_admin == 1)
                         <li><a href="/" class="{{ Request::segment(1) == '' ? 'active' : '' }}"><i class="uil uil-dashboard"></i><span>Dashboard</span></a></li>
+                        @endif
                         <li><a href="{{ route('leads.index') }}" class="{{ Request::segment(1) == 'leads' ? 'active' : '' }}"><i class="uil uil-phone"></i><span>Leads</span></a></li>
                         <li><a href="{{ route('clients.index') }}" class="{{ Request::segment(1) == 'clients' ? 'active' : '' }}"><i class="uil uil-users-alt"></i><span>Clients</span></a></li>
                         <li><a href="{{ route('tasks.index') }}" class="{{ Request::segment(1) == 'tasks' ? 'active' : '' }}" class="{{ Request::segment(1) == 'projects' ? 'active' : '' }}"><i class="fa-light fa-diagram-project"></i><span>Projects</span></a></li>

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->only(['edit','destroy','payment','expense']);
+    }
     /**
      * Display a listing of the resource.
      *

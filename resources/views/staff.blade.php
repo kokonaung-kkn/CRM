@@ -96,12 +96,14 @@
                                 <td>{{ $staff->email }}</td>
                                 <td>{{ $staff->phone_number }}</td>
                                 <td class="d-flex">
+                                    @if(auth()->user()->is_admin == 1 || auth()->user()->id == $staff->id)
                                     <a href="{{ route('staff.edit',$staff->id) }}" class="btn btn-secondary me-2"><i class="uil uil-edit"></i></a>
                                     <form action="{{ route('staff.destroy',$staff->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>                                    
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach                                               

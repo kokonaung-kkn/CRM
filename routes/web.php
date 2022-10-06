@@ -21,6 +21,10 @@ use App\Http\Controllers\TaskController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes([
+    'register' => false,
+]);
+
 Route::get('/', [DashboardController::class,'index'])->middleware('auth');
 
 Route::get('schedule', function(){
@@ -64,6 +68,3 @@ Route::resource('payments', PaymentController::class)->except([
 
 Route::put('payments/{payment}',[PaymentController::class,'paid'])->name('payments.paid');
 
-Auth::routes([
-    'register' => false,
-]);

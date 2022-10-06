@@ -140,12 +140,14 @@
                                 <td>{{ $task->end_time }}</td>
                                 <td class="d-flex">
                                     <a title="Project Room" href="{{ route('tasks.show',$task->project_no) }}" class="btn btn-warning me-2"><i class="uil uil-meeting-board"></i></a>
+                                    @if(auth()->user()->is_admin == 1)
                                     <a href="{{ route('tasks.edit',$task->project_no) }}" class="btn btn-secondary me-2"><i class="uil uil-edit"></i></a>
                                     <form action="{{ route('tasks.destroy',$task->project_no) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>                                    
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach                                               

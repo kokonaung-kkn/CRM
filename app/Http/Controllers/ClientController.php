@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->only(['edit','destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -12,6 +12,11 @@ use function PHPUnit\Framework\isEmpty;
 
 class LeadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->only(['edit','destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
