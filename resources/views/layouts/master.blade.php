@@ -45,14 +45,11 @@
                                 <li><a href="{{ route('staff.index') }}" class="{{ Request::segment(1) == 'staff' ? 'active' : '' }}"><span>Staff</span></a></li>
                             </ul>
                         </li>
-                        <li><a href="#" class="{{ Request::segment(1) == 'schedule' ? 'active' : '' }}"><i class="uil uil-calendar-alt"></i><span>Schedule</span></a></li>
                         <li class="sub-menu">
                             <a href="#"><i class="uil uil-folder-open"></i><span>Reports <i class="uil uil-angle-down"></i></span></a>
                             <ul>
-                                <li><a href="#"><span>Example 1</span></a></li>
-                                <li><a href="#"><span>Example 1</span></a></li>
-                                <li><a href="#"><span>Example 1</span></a></li>
-                                <li><a href="#"><span>Example 1</span></a></li>
+                                <li><a href="{{ route('reports.project') }}"><span>Projects Income</span></a></li>
+                                
                             </ul>
                         </li>
                     </ul>

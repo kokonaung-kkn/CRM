@@ -101,7 +101,7 @@
                                             <label class="input-group-text" for="inputGroupSelect01"><i class="fa-light fa-hashtag"></i></label>
                                             <select class="form-select" name="source" value="{{ old('source') }}" id="inputGroupSelect01">
                                                 <option selected>Source</option>
-                                                <option value="by company">By Company</option>
+                                                <option value="by company">Company</option>
                                                 <option value="facebook">Facebook</option>
                                                 <option value="google">Google</option>
                                                 <option value="twitter">Twitter</option>

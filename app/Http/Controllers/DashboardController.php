@@ -21,12 +21,22 @@ class DashboardController extends Controller
         $allClients = Lead::where('status','client')->get();
         $allStaffs = User::all();
         $allProjects = Task::all();
+        $sources = $this->leadSource();
         $MonthlyProj = $this->monthlyProjectReport();
         $incomes = $this->income();
         $expenses = $this->expense();
         return view('dashboard',compact(
-            'allLeads','allClients','allStaffs','allProjects','MonthlyProj','incomes','expenses'
+            'allLeads','allClients','allStaffs','allProjects',
+            'MonthlyProj','incomes','expenses','sources'
         ));
+    }
+
+    public function leadSource(){
+        $source = DB::table('leads')
+                    ->selectRaw('lead_source, COUNT(lead_source) AS total')
+                    ->groupBy('lead_source')
+                    ->get();
+        return $source;
     }
 
     public function monthlyProjectReport(){

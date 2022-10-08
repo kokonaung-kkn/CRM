@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TaskController;
 
 /*
@@ -67,4 +68,7 @@ Route::resource('payments', PaymentController::class)->except([
 ]);
 
 Route::put('payments/{payment}',[PaymentController::class,'paid'])->name('payments.paid');
+
+Route::get('/Reports/projects-income',[ReportController::class,'projectIncome'])->name('reports.project');
+Route::post('/Reports/projects-income',[ReportController::class,'ProjectIncome'])->name('reports.project.date');
 

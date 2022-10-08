@@ -71,7 +71,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div>
-                            <canvas id="incomeVSexpanse" height="200"></canvas>
+                            <canvas id="leadSource" height="200"></canvas>
                         </div>
                     </div>
                 </div>
@@ -86,9 +86,62 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-5 mb-5">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <canvas id="incomeVSexpanse" height="200" width="500"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
+
+    // Lead Source
+
+    const lead_source_total = {
+        'Company' : 0,
+        'Facebook' : 0,
+        'Google' : 0,
+        'Linkedin' : 0,
+        'Others' : 0,
+        'Twitter' : 0,
+    }
+
+    @foreach($sources as $source)
+        lead_source_total.{{ $source->lead_source }} = {{ $source->total }}
+    @endforeach
+
+    let source = Object.keys(lead_source_total) 
+    let source_total = Object.values(lead_source_total)
+
+    const source_data = {
+        labels: source,
+        datasets: [{
+        label: 'Lead Sources',
+        backgroundColor: '#353a56',
+        borderColor: '#0d1231',
+        data: source_total,
+        }]
+    };
+
+    const source_config = {
+        type: 'line',
+        data: source_data,
+        options: {}
+    };
+
+    const leadSource = new Chart(
+        document.getElementById('leadSource'),
+        source_config
+    );
+
+    // Income VS Expense
+
     const income_vs_expense = {
         'Jan' : {'income': 0, 'expense': 0},
         'Feb' : {'income': 0, 'expense': 0},
@@ -116,15 +169,11 @@
     let in_ex_total = Object.values(income_vs_expense)
     let income_total = []
     let expense_total = []
-    console.log(in_ex_total[0].income)
 
     for(let i=0; i<in_ex_total.length; i++){
         income_total.push(in_ex_total[i].income)
         expense_total.push(in_ex_total[i].expense)
     }
-
-    console.log(income_total)
-    console.log(expense_total)
 
     const data = {
         labels: in_ex_months,
@@ -182,8 +231,6 @@
     @foreach($MonthlyProj as $data)
         month_proj.{{ $data->Months }} = {{ $data->Count }}
     @endforeach
-
-    console.log(month_proj)
 
     let months = Object.keys(month_proj) 
     let count = Object.values(month_proj)

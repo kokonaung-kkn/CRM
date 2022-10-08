@@ -180,7 +180,7 @@ class LeadController extends Controller
         }
         $lead->save();
 
-        if($request->status == 'Potential'){
+        if($request->status == 'potential'){
             return redirect('/leads')->with('success','The information has been updated.');
         }else{
             return redirect('/clients')->with('success','The information has been updated.');

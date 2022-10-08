@@ -80,7 +80,7 @@
                                 <label class="input-group-text" for="inputGroupSelect01"><i class="fa-light fa-hashtag"></i></label>
                                 <select class="form-select" name="source" id="inputGroupSelect01">
                                     <option>Source</option>
-                                    <option {{ $lead->lead_source == 'By company' ? 'selected' : '' }}>By Company</option>
+                                    <option {{ $lead->lead_source == 'Company' ? 'selected' : '' }}>Company</option>
                                     <option {{ $lead->lead_source == 'Facebook' ? 'selected' : '' }}>Facebook</option>
                                     <option {{ $lead->lead_source == 'Google' ? 'selected' : '' }}>Google</option>
                                     <option {{ $lead->lead_source == 'Twitter' ? 'selected' : '' }}>Twitter</option>
